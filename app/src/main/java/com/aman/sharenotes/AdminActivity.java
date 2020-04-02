@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,6 +42,9 @@ public class AdminActivity extends AppCompatActivity {
     private StorageReference FileRef;
     private DatabaseReference productRef;
 
+
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +60,10 @@ public class AdminActivity extends AppCompatActivity {
         InputSubjectName = (EditText) findViewById(R.id.Subject_Name);
         InputFile = (ImageView) findViewById(R.id.upload_file);
         AddNewFile = (Button) findViewById(R.id.add_file);
-//        viewpdf = (Button) findViewById(R.id.viewpdf);
+        viewpdf = (Button) findViewById(R.id.viewpdf);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Plz Wait");
 
 
 
@@ -68,6 +75,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+
         AddNewFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -76,14 +84,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-//        viewpdf.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                Intent intent = new Intent(AdminActivity.this, Main2Activity.class);
-//                startActivity(intent);
-//            }
-//        });
+        viewpdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(AdminActivity.this, ShowPostActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -122,6 +130,7 @@ public class AdminActivity extends AppCompatActivity {
         subject = InputSubjectName.getText().toString();
         name = InputFileName.getText().toString();
 
+        progressDialog.show();
 
         if (PdfUri==null)
         {
@@ -225,6 +234,7 @@ public class AdminActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             Toast.makeText(AdminActivity.this, "Final finish", Toast.LENGTH_SHORT).show();
+                            progressDialog.show();
 
 
 //                            Intent intent = new Intent(AdminActivity.this, SuperAdmin.class);
@@ -234,6 +244,7 @@ public class AdminActivity extends AppCompatActivity {
                         else {
 
                             String Message= task.getException().toString();
+                            progressDialog.dismiss();
                             Toast.makeText(AdminActivity.this, "Faildes: "+ Message, Toast.LENGTH_SHORT).show();
                         }
                     }
