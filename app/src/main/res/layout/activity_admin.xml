@@ -1,21 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminActivity">
 
+    <ImageView
+        android:id="@+id/upload_file"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/attach_file"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attach file"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="150dp"
+        android:textSize="30dp"
+        />
+
+    <EditText
+        android:id="@+id/File_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/upload_file"
+        android:layout_margin="20dp"
+        android:background="@drawable/et_ui2"
+        android:padding="20dp"
+        android:hint="File Name "
+        android:textColorHint="@color/colorPrimaryDark"
+
+        />
+
+    <EditText
+        android:id="@+id/File_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/File_name"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/et_ui2"
+        android:padding="20dp"
+        android:hint="File description "
+        android:textColorHint="@color/colorPrimaryDark"
+
+        />
+
+    <EditText
+        android:id="@+id/Subject_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/File_description"
+        android:layout_margin="20dp"
+        android:background="@drawable/et_ui2"
+        android:padding="20dp"
+        android:hint="Subject Name "
+        android:textColorHint="@color/colorPrimaryDark"
+
+        />
+
     <Button
-        android:id="@+id/button"
-        android:layout_width="171dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="218dp"
-        android:layout_marginEnd="158dp"
+        android:id="@+id/add_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Subject_Name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/bt_ui"
-        android:text="Admin Button "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:padding="20dp"
+        android:text="Add Product"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/viewpdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_file"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bt_ui"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:text="view pdf"
+        android:textSize="20dp"
+        />
+</RelativeLayout>
