@@ -32,7 +32,7 @@ import java.util.HashMap;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private String  name, Description , subject,  saveCurrentDate, saveCurrentTime;
+    private String  name, Description , subject,  saveCurrentDate, saveCurrentTime,admin="admin";
     private Button AddNewFile, viewpdf;
     private ImageView InputFile;
     private EditText InputFileName, InputFileDescription, InputSubjectName;
@@ -89,6 +89,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 Intent intent = new Intent(AdminActivity.this, ShowPostActivity.class);
+                intent.putExtra("id", admin);
                 startActivity(intent);
             }
         });
@@ -234,7 +235,7 @@ public class AdminActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             Toast.makeText(AdminActivity.this, "Final finish", Toast.LENGTH_SHORT).show();
-                            progressDialog.show();
+                            progressDialog.dismiss();
 
 
 //                            Intent intent = new Intent(AdminActivity.this, SuperAdmin.class);

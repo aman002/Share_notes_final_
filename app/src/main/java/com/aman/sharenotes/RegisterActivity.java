@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView alreadyacc;
 
-    String registerid="user";
+    String id="user";
 
     private FirebaseAuth mAuth;
     @Override
@@ -66,15 +66,25 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setMessage("Plz Wait");
 
 
-        Intent intent=getIntent();
-        registerid = intent.getStringExtra("regid");
+        try {
+            Intent intent=getIntent();
+            id = intent.getStringExtra("regid");
 
-        if (registerid.equals("admin"))
-        {
-            Toast.makeText(RegisterActivity.this, "This is Admin block", Toast.LENGTH_SHORT).show();
-            email.setHint("Number");
-            email.setInputType(InputType.TYPE_CLASS_NUMBER);
+            if (id.equals("admin"))
+            {
+                Toast.makeText(RegisterActivity.this, "This is Admin block", Toast.LENGTH_SHORT).show();
+                email.setHint("Number");
+                email.setInputType(InputType.TYPE_CLASS_NUMBER);
+            }
         }
+        catch (Exception e)
+        {
+
+            Toast.makeText(this, "This exception", Toast.LENGTH_SHORT).show();
+        }
+
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -82,21 +92,28 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String emailid= email.getText().toString().trim();
+                String mailid= email.getText().toString().trim();
                 String pass= password.getText().toString().trim();
                 String name = username.getText().toString().trim();
 
-
-                if (registerid.equals("admin"))
-                {
-                    registeradmin(emailid,pass,name);
+                try {
+                    if (id.equals("admin"))
+                    {
+                        registeradmin(mailid,pass,name);
+                    }
                 }
-                else if (registerid.equals("users"))
+                catch (Exception e)
+                {
+                    Toast.makeText(RegisterActivity.this, "Second Exception", Toast.LENGTH_SHORT).show();
+                }
+                int i=1;
+
+                if (i==1)
                 {
                     //register id == user
 
 
-                    if (!Patterns.EMAIL_ADDRESS.matcher(emailid).matches())
+                    if (!Patterns.EMAIL_ADDRESS.matcher(mailid).matches())
                     {
                         //set error to email edittext
                         email.setError("Invalid Email");
@@ -114,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        registerUser(emailid,pass);
+                        registerUser(mailid,pass);
                     }
 
                     //end
@@ -160,6 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
                     HashMap<String, Object> usersdataMap = new HashMap<>();
                     usersdataMap.put("Name",name);
                     usersdataMap.put("Password",pass);
+                    usersdataMap.put("Number",emailid);
 
 
                     RootRef.child(emailid).updateChildren(usersdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -187,6 +205,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressDialog.dismiss();
 
                 Toast.makeText(RegisterActivity.this, "Cancelledddddddd", Toast.LENGTH_SHORT).show();
             }
@@ -211,7 +230,7 @@ public class RegisterActivity extends AppCompatActivity {
                     FirebaseUser currentUser = mAuth.getCurrentUser();
 //                            updateUI(currentUser);
                     Toast.makeText(RegisterActivity.this, "Registered...\n"+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
+                    startActivity(new Intent(RegisterActivity.this,ShowPostActivity.class));
                     finish();
 
 

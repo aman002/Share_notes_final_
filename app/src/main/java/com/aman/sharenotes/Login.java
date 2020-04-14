@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
-            Intent intent = new Intent(Login.this,HomeActivity.class);
+            Intent intent = new Intent(Login.this,ShowPostActivity.class);
             intent.putExtra("full_name", name);
             startActivity(intent);
             finish();
@@ -275,7 +275,7 @@ public class Login extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             progressDialog.dismiss();
-                            Intent intent = new Intent(Login.this,HomeActivity.class);
+                            Intent intent = new Intent(Login.this,ShowPostActivity.class);
                             startActivity(intent);
                             finish();
 

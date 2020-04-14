@@ -14,4 +14,20 @@
         android:layout_centerHorizontal="true"
         />
 
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/newadmin"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview"
+        android:text="Delete"
+        android:layout_below="@+id/listview"
+        />
+
 </RelativeLayout>
